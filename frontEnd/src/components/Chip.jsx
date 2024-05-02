@@ -7,7 +7,6 @@ const Chip = ({label}) => {
 
   useEffect(()=>{
     axios.get(GET_ALL_CATEGORY_API).then((res)=>{
-      console.log(res.data.data);
       setCategories(res?.data?.data)
     }).catch((err)=>{
       console.log(err);

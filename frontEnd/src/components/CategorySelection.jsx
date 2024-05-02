@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { GET_ALL_CATEGORY_API } from '../services/api';
 
-const CategorySelection = ({ onSelectCategory, activePage }) => {
+const CategorySelection = ({ onSelectCategory }) => {
     const [selectedCategory, setSelectedCategory] = useState([]);
 
     useEffect(() => {
@@ -22,13 +22,13 @@ const CategorySelection = ({ onSelectCategory, activePage }) => {
 
     return (
         <>
-            <button className='bg-blue-950 rounded-lg p-2' onClick={() => onSelectCategory(null)}>All</button>
+            <button className='bg-blue-950 rounded-lg p-2' onClick={() => onSelectCategory('All')}>All</button>
             {/* {console.log(selectedCategory)} */}
             {selectedCategory && selectedCategory?.data?.map((item, index) => {
                 return (
                     <>
-                        <button className={`bg-blue-950 rounded-lg p-2 ${activePage === item ? "active_button" : ""}`}
-                            onClick={() => onSelectCategory(item.categoryName)}>{item.categoryName}</button>
+                        <button className={`bg-blue-950 rounded-lg p-2`}
+                            onClick={() => onSelectCategory(item._id)}>{item.categoryName}</button>
                     </>
                 )
             })}

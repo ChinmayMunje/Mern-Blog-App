@@ -7,12 +7,14 @@ import { getCurrentUserDetails, getToken } from '../auth';
 // import { createPost, uploadImage } from '../services/post_Service';
 import { toast } from 'react-toastify';
 import { UserContext } from '../context/userContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const BlogPostForm = () => {
     const editor = useRef(null);
     const [categories, setCategories] = useState([])
     const [user, setUser] = useState(undefined);
+    const navigate = useNavigate();
 
     const [post, setPost] = useState({
         title: '',
@@ -146,6 +148,7 @@ const BlogPostForm = () => {
         }).then((res) => {
             console.log(res.data);
             toast.success("Post Created Successfully !!")
+        
 
             setPost({
                 title: '',
