@@ -97,65 +97,66 @@ const BlogPostForm = () => {
 
         // Create FormData object to send form data including the image
 
-        try {
-            const formData = new FormData();
-            formData.append('title', post.title);
-            formData.append('category', post.categoryName);
-            formData.append('content', post.content);
-            formData.append('thumbnail', post.thumbnail);
+        // try {
+        //     const formData = new FormData();
+        //     formData.append('title', post.title);
+        //     formData.append('category', post.categoryName);
+        //     formData.append('content', post.content);
+        //     formData.append('thumbnail', post.thumbnail);
 
-            console.log("CATEGORY TYPE "+typeof(post.categoryName));
+        //     console.log("CATEGORY TYPE "+typeof(post.categoryName));
 
-            const response = await fetch(ADD_POST_API, {
-                method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${currentUser?.data?.token}`,
-                    // 'Content-Type': 'multipart/form-data'
-                },
-                body: formData,
-            });
-            const data = await response.json();
-            console.log(data); // Handle response from server
-            toast.success("Post Created Successfully !!")
-
-            setPost({
-                title: '',
-                content: '',
-                categoryName: '',
-                thumbnail: ''
-            })
-        }
-        catch (error) {
-            console.log(error);
-            // toast.error("Failed to Create Post !!")
-
-        }
-
-
-
-
-        //  axios.post(ADD_POST_API,formData, {
-        //     withCredentials: true,
-        //     headers: {
-        //         Authorization: `Bearer ${currentUser?.data?.token}`,
-        //         'Content-Type': 'multipart/form-data'
-        //     }
-        // }).then((res) => {
-        //     console.log(res.data);
+        //     const response = await fetch(ADD_POST_API, {
+        //         method: 'POST',
+        //         headers: {
+        //             Authorization: `Bearer ${currentUser?.data?.token}`,
+        //             // 'Content-Type': 'multipart/form-data'
+        //         },
+        //         body: formData,
+        //     });
+        //     const data = await response.json();
+        //     console.log(data); // Handle response from server
         //     toast.success("Post Created Successfully !!")
 
         //     setPost({
         //         title: '',
         //         content: '',
-        //         categoryId: '',
+        //         categoryName: '',
         //         thumbnail: ''
-        //       })
-        // }).catch((err) => {
-        //     console.log(err);
-        //     JSON.stringify(post);
-        //     toast.error("Failed to Create Post !!")
+        //     })
+        // }
+        // catch (error) {
+        //     console.log(error);
+        //     // toast.error("Failed to Create Post !!")
 
-        // })
+        // }
+
+        const formData = new FormData();
+        formData.append('title', post.title);
+        formData.append('category', post.categoryName);
+        formData.append('content', post.content);
+        formData.append('thumbnail', post.thumbnail);
+
+        axios.post(ADD_POST_API, formData, {
+            withCredentials: true,
+            headers: {
+                Authorization: `Bearer ${currentUser?.data?.token}`,
+                // 'Content-Type': 'multipart/form-data'
+            }
+        }).then((res) => {
+            console.log(res.data);
+            toast.success("Post Created Successfully !!")
+
+            setPost({
+                title: '',
+                content: '',
+                categoryId: '',
+                thumbnail: ''
+            })
+        }).catch((err) => {
+            console.log(err);
+            toast.error("Failed to Create Post !!")
+        })
     }
 
 
