@@ -9,7 +9,7 @@ import authRoute from './routes/authRoute.js'
 import categoryRoute from './routes/categoryRoute.js'
 import commentsRoute from './routes/commentsRoute.js'
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import path, { dirname, join } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -19,6 +19,11 @@ const app = express();
 // app.use(express.static('uploads'))
 // app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/uploads', express.static(join(__dirname, 'uploads')));
+
+
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, "/frontEnd/dist/index.html"))
+})
 
 const port = process.env.PORT || 8000
 

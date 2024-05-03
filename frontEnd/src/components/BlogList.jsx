@@ -7,8 +7,9 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import CategorySelection from '../components/CategorySelection';
 import { UserContext } from '../context/userContext';
 import axios from 'axios';
+import Search from './Search';
 
-const BlogList = () => {
+const BlogList = ({searchQuery}) => {
 
     const [postContent, setPostContent] = useState(
         {
@@ -23,7 +24,7 @@ const BlogList = () => {
 
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [pageNumber, setPageNumber] = useState(0);
-    const postPerPage = 9;
+    const postPerPage = 12;
     const pagesVisited = pageNumber * postPerPage;
 
 
@@ -57,7 +58,7 @@ const BlogList = () => {
         setPageNumber(0);
     }
 
-    // const filterBlogs = postContent?.content?.filter((blogs) => !selectedCategory || blogs.category === selectedCategory)
+    const searchFilter = postContent?.content?.filter((blog) => blog.title.toLowerCase().includes(searchQuery.toLowerCase()));
 
     console.log(postContent?.content);
 
@@ -73,6 +74,7 @@ const BlogList = () => {
 
     return (
         <>
+            {/* <Search/> */}
             <div className='flex flex-col justify-center items-center gap-6'>
                 <div className='flex justify-center gap-10 text-white'>
                     <CategorySelection onSelectCategory={handleCategoryChange} />
@@ -81,7 +83,8 @@ const BlogList = () => {
                 <h1 className='text-2xl md:text-3xl text-center'>Blogs Count ({filteredBlogs?.length})</h1>
 
                 <div className='pt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
-                    {filteredBlogs?.slice(pagesVisited, pagesVisited + postPerPage)
+                    {filteredBlogs?.sort((a,b)=> new Date(b.postDate) - new Date(a.postDate))
+                    .slice(pagesVisited, pagesVisited + postPerPage)
                         .map(blog => <BlogItems blog={blog} key={blog.id} />)}
                 </div>
 

@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div>
       <Search/>
-      <BlogList/>
+      {/* <BlogList/> */}
     </div>
   )
 }
