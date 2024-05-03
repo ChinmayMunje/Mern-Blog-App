@@ -44,11 +44,11 @@ const BlogList = () => {
             console.log(err);
         });
 
-        axios.get(GET_ALL_CATEGORY_API).then((res)=>{
+        axios.get(GET_ALL_CATEGORY_API).then((res) => {
             setSelectedCategory(res?.data?.data)
-          }).catch((err)=>{
+        }).catch((err) => {
             console.log(err);
-          })
+        })
 
     }, [])
 
@@ -64,7 +64,7 @@ const BlogList = () => {
     const filteredBlogs = selectedCategory === 'All' ? postContent.content : postContent?.content?.filter(blog => blog.category === selectedCategory);
 
 
-    const pageCount = Math.ceil(postContent.content.length / postPerPage);
+    const pageCount = Math.ceil(filteredBlogs?.length / postPerPage);
 
     const changePage = ({ selected }) => {
         setPageNumber(selected);
@@ -73,40 +73,40 @@ const BlogList = () => {
 
     return (
         <>
-            <div className='flex justify-center gap-10 text-white'>
-                <CategorySelection onSelectCategory={handleCategoryChange} />
+            <div className='flex flex-col justify-center items-center gap-6'>
+                <div className='flex justify-center gap-10 text-white'>
+                    <CategorySelection onSelectCategory={handleCategoryChange} />
+                </div>
+
+                <h1 className='text-2xl md:text-3xl text-center'>Blogs Count ({filteredBlogs?.length})</h1>
+
+                <div className='pt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+                    {filteredBlogs?.slice(pagesVisited, pagesVisited + postPerPage)
+                        .map(blog => <BlogItems blog={blog} key={blog.id} />)}
+                </div>
+
+                <ReactPaginate
+                    breakLabel={<span className='mr-4'>...</span>}
+                    nextLabel={
+                        <span className='w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md'>
+                            <BsChevronRight onClick={() => changePage} />
+                        </span>
+                    }
+                    onPageChange={changePage}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    previousLabel={
+                        <span className='w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md mr-4'>
+                            <BsChevronLeft onClick={() => changePage} />
+                        </span>
+                    }
+                    containerClassName="flex items-center justify-content-center mt-8 mb-4"
+                    pageClassName="block border- border-solid border-gray-200 hover:bg-gray-300 w-10 h-10 p-1 flex items-center justify-center rounded-md mr-4"
+                    pageLinkClassName=''
+                    activeClassName="bg-blue-950 text-white"
+                />
             </div>
 
-
-            <h1 className='flex text-2xl text-start'>Blogs Count ({postContent?.content && postContent?.content?.length})</h1>
-
-            <div className='pt-4 grid grid-cols-3 gap-6'>
-                {filteredBlogs?.slice(pagesVisited, pagesVisited + postPerPage)
-                    .map(blog => <BlogItems blog={blog} key={blog.id} />)}
-            </div>
-
-            <ReactPaginate
-                breakLabel={
-                    <span className='mr-4'>...</span>
-                }
-                nextLabel={
-                    <span className='w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md'>
-                        <BsChevronRight onClick={() => changePage} />
-                    </span>
-                }
-                onPageChange={changePage}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel={
-                    <span className='w-10 h-10 flex items-center justify-center bg-gray-200 rounded-md mr-4'>
-                        <BsChevronLeft onClick={() => changePage} />
-                    </span>
-                }
-                containerClassName="flex items-center justify-content-center mt-8 mb-4"
-                pageClassName="block border- border-solid border-gray-200 hover:bg-gray-300 w-10 h-10 p-1 flex items-center justify-center rounded-md mr-4"
-                pageLinkClassName=''
-                activeClassName="bg-blue-950 text-white"
-            />
         </>
     )
 }

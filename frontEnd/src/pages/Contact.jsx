@@ -70,13 +70,3 @@ const Contact = () => {
 }
 
 export default Contact
-
-
-//<div className="flex h-[600px]  shadow-2xl">
-
-{/* Left column with a different color */ }
-
-
-{/* Right column with a blue color */ }
-
-//</div>//

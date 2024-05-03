@@ -148,7 +148,7 @@ const BlogPostForm = () => {
         }).then((res) => {
             console.log(res.data);
             toast.success("Post Created Successfully !!")
-        
+
 
             setPost({
                 title: '',
@@ -164,14 +164,12 @@ const BlogPostForm = () => {
 
 
     return (
-        <div className='py-20'>
-            <div className="w-full h-full p-4 bg-white rounded-md shadow-md">
-                <h2 className="text-2xl font-semibold mb-4 text-start">Create a Post</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2 text-start">
-                            Title
-                        </label>
+        <div className='py-8 md:py-20'>
+            <div className="w-full md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto p-4 bg-white rounded-md shadow-md">
+                <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-start">Create a Post</h2>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                        <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2 text-start">Title</label>
                         <input
                             type="text"
                             id="title"
@@ -183,69 +181,55 @@ const BlogPostForm = () => {
                         />
                     </div>
 
-
-                    <div className="mb-4">
-                        <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2 text-start">
-                            Category
-                        </label>
-
-
+                    <div>
+                        <label htmlFor="category" className="block text-gray-700 text-sm font-bold mb-2 text-start">Category</label>
                         <select
                             name="categoryName"
                             onChange={handleChange}
                             value={post.categoryName}
-                            defaultValue={0}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                            className="w-full p-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+                            required
                         >
                             <option value={0}>---Choose a Category---</option>
-                            {categories && categories.map && categories.map((category) => {
-                                return (
-                                    <option key={category._id} value={category.categoryName}>{category.categoryName}</option>
-                                )
-                            })}
+                            {categories && categories.map && categories.map((category) => (
+                                <option key={category._id} value={category.categoryName}>{category.categoryName}</option>
+                            ))}
                         </select>
                     </div>
 
-                    {/* ADD COVER IMAGE TO POST */}
-
-                    <div className='mb-4'>
-                        <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2 text-start">
-                            Choose Cover Image
-                        </label>
-                        <input type="file" id='image' className='flex items-start justify-start' onChange={handleImageChange} />
+                    <div>
+                        <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2 text-start">Choose Cover Image</label>
+                        <input type="file" id="image" onChange={handleImageChange} className="w-full p-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300" />
                     </div>
 
-
-                    <div className="mb-4">
-                        <label htmlFor="content" className="block text-gray-700 text-sm font-bold mb-2 text-start">
-                            Content
-                        </label>
-
-
-
+                    <div>
+                        <label htmlFor="content" className="block text-gray-700 text-sm font-bold mb-2 text-start">Content</label>
                         <JoditEditor
                             className='text-left'
                             ref={editor}
                             value={post.content}
-                            // config={config}
                             onChange={newContent => contentHandleChange(newContent)}
                         />
                     </div>
 
-                    <button
-                        type="submit"
-                        className="bg-blue-950 text-white px-4 py-2 rounded-md hover:bg-blue-900 focus:outline-none focus:ring focus:border-blue-800"
-                    >
-                        Create Post
-                    </button>
-                    <button
-                        className="bg-red-500 text-white ml-3 px-4 py-2 rounded-md hover:bg-red-400 focus:outline-none focus:ring focus:bg-red-500"
-                    >
-                        Reset Content
-                    </button>
+                    <div className="flex justify-between">
+                        <button
+                            type="submit"
+                            className="bg-blue-950 text-white px-4 py-2 rounded-md hover:bg-blue-900 focus:outline-none focus:ring focus:border-blue-800"
+                        >
+                            Create Post
+                        </button>
+                        <button
+                            type="reset"
+                            className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-400 focus:outline-none focus:ring focus:bg-red-500"
+                        >
+                            Reset Content
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
+
     )
 }
 

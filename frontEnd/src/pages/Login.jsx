@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { LOGIN_API } from '../services/api'
 import { UserContext } from '../context/userContext'
 
-const Login = ({onSuccess}) => {
+const Login = ({ onSuccess }) => {
 
   const navigate = useNavigate();
 
@@ -14,9 +14,9 @@ const Login = ({onSuccess}) => {
     email: '',
     password: ''
   })
-  const [error,setError] = useState("");
+  const [error, setError] = useState("");
 
-  const {setCurrentUser} = useContext(UserContext);
+  const { setCurrentUser } = useContext(UserContext);
 
   const switchSignup = (event) => {
     setLoginModal(false)
@@ -48,14 +48,14 @@ const Login = ({onSuccess}) => {
       setCurrentUser(res);
       window.location.reload();
       navigate("/")
-      
+
 
 
       /// SAVE DATA TO LOCAL STORAGE
 
-    //   const userDataFromServer = res.data
+      //   const userDataFromServer = res.data
 
-    //   localStorage.setItem('userData', JSON.stringify(userDataFromServer))
+      //   localStorage.setItem('userData', JSON.stringify(userDataFromServer))
       // doLogin(res, () => {
       //   console.log("Login Details is saved in Local Storage");
 
@@ -78,29 +78,29 @@ const Login = ({onSuccess}) => {
 
   return (
     <>
-      <h3 className='text-5xl font-semibold'>Welcome Back</h3>
-      <p className='font-medium text-lg text-gray-500 mt-4'>Welcome Back! Please Enter Your details</p>
-      <form className='mt-8' onSubmit={handleSubmit}>
+      <h3 className='text-4xl md:text-5xl font-semibold'>Welcome Back</h3>
+      <p className='font-medium text-lg md:text-xl text-gray-500 mt-2 md:mt-4'>Welcome Back! Please Enter Your details</p>
+      <form className='mt-4 md:mt-8' onSubmit={handleSubmit}>
         {error && <p className='text-red-600'>{error}</p>}
         <div className='flex flex-col items-start justify-center'>
-          <label className='text-lg font-medium'>Email</label>
-          <input type="email" placeholder='Enter Your email' name='email' value={loginDetails.email} onChange={handleChange} className='w-full border-2 border-gray-100 rounded-xl p-2 mt-1 bg-transparent' />
+          <label className='text-lg md:text-xl font-medium'>Email</label>
+          <input type="email" placeholder='Enter Your email' name='email' value={loginDetails.email} onChange={handleChange} className='w-full md:w-[80%] border-2 border-gray-100 rounded-xl p-2 mt-1 bg-transparent' />
         </div>
-        <div className='flex flex-col items-start justify-center mt-2'>
-          <label className='text-lg font-medium'>Password</label>
-          <input type="password" placeholder='Enter Your password' name='password' value={loginDetails.password} onChange={handleChange} className='w-full border-2 border-gray-100 rounded-xl p-2 mt-1 bg-transparent' />
+        <div className='flex flex-col items-start justify-center mt-2 md:mt-4'>
+          <label className='text-lg md:text-xl font-medium'>Password</label>
+          <input type="password" placeholder='Enter Your password' name='password' value={loginDetails.password} onChange={handleChange} className='w-full md:w-[80%] border-2 border-gray-100 rounded-xl p-2 mt-1 bg-transparent' />
         </div>
-        <div className='mt-8 flex justify-between items-center'>
-          <div>
+        <div className='mt-4 md:mt-6 flex justify-between items-center'>
+          <div className='flex items-center'>
             <input type="checkbox" id='remember' />
             <label htmlFor='remember' className='ml-2 font-medium text-base'>Remember for 30 days</label>
           </div>
           <button className='font-medium text-base text-blue-700'>Forgot password</button>
         </div>
-        <div className='mt-8 flex flex-col gap-y-4'>
-          <button className='bg-blue-950 text-white text-lg font-bold py-3 rounded-xl active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out' type='submit'>Sign in</button>
+        <div className='mt-6 md:mt-8 flex flex-col gap-y-4'>
+          <button className='bg-blue-950 text-white text-lg md:text-xl font-bold py-3 md:py-4 rounded-xl active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out' type='submit'>Sign in</button>
 
-          <button className='flex items-center justify-center gap-2 active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01]  ease-in-out transform py-4  rounded-xl text-gray-700 font-semibold text-lg border-2 border-gray-100 '>
+          <button className='flex items-center justify-center gap-2 active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01]  ease-in-out transform py-3 md:py-4 rounded-xl text-gray-700 font-semibold text-lg border-2 border-gray-100 '>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5.26644 9.76453C6.19903 6.93863 8.85469 4.90909 12.0002 4.90909C13.6912 4.90909 15.2184 5.50909 16.4184 6.49091L19.9093 3C17.7821 1.14545 15.0548 0 12.0002 0C7.27031 0 3.19799 2.6983 1.24023 6.65002L5.26644 9.76453Z" fill="#EA4335" />
               <path d="M16.0406 18.0142C14.9508 18.718 13.5659 19.0926 11.9998 19.0926C8.86633 19.0926 6.21896 17.0785 5.27682 14.2695L1.2373 17.3366C3.19263 21.2953 7.26484 24.0017 11.9998 24.0017C14.9327 24.0017 17.7352 22.959 19.834 21.0012L16.0406 18.0142Z" fill="#34A853" />
@@ -110,14 +110,14 @@ const Login = ({onSuccess}) => {
             Sign with Google
           </button>
         </div>
-        <div className='mt-8 flex justify-center items-center'>
+        <div className='mt-6 md:mt-8 flex justify-center items-center'>
           <p className='font-medium text-base'>Don't have an account?</p>
           <button
             // onClick={() => setAuthState('register')}
             className='ml-2 font-medium text-base text-blue-700'>Sign up</button>
         </div>
-
       </form>
+
     </>
   )
 }

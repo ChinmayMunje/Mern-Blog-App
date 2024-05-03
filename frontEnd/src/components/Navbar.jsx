@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import Modal from './Modal';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
-// import { isLoggedIn, doLogOut, getCurrentUserDetails } from '../auth';
 import { RxCross2 } from "react-icons/rx";
 import { FaBars } from "react-icons/fa";
 import { UserContext } from '../context/userContext';
@@ -21,7 +20,7 @@ const Navbar = () => {
   const [login, setLogin] = useState(false);
   const [user, setUser] = useState(undefined);
 
-  const {currentUser} = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
 
   const navItems = [
     { path: "/", link: "Home" },
@@ -50,8 +49,8 @@ const Navbar = () => {
     localStorage.removeItem("user");
     navigate("/")
     window.location.reload();
-    
-}
+
+  }
 
 
   const printUserName = (name) => {
@@ -75,21 +74,26 @@ const Navbar = () => {
       <nav className='px-4 py-4 max-w-7xl mx-auto flex justify-between items-center'>
         <img src="https://osf.digital/library/media/osf/digital/modules/product-summary/bloglink-logo.png" alt="logo" className='w-[140px]' />
 
-
+        {/* Desktop navigation */}
         <ul className='md:flex gap-12 text-lg hidden font-bold text-blue-900'>
           {navItems.map(({ path, link }) =>
-            <li>
-              <NavLink className={({ isActive, isPending }) =>
-                isActive ? "active" : isPending ? "pending" : ""
-              } to={path}>{link}</NavLink>
+            <li key={path}>
+              <NavLink
+                className={({ isActive, isPending }) =>
+                  isActive ? "active" : isPending ? "pending" : ""
+                }
+                to={path}
+              >
+                {link}
+              </NavLink>
             </li>
           )}
         </ul>
 
+        {/* Mobile navigation toggle */}
         <div className='lg:flex gap-5 items-center hidden'>
           {user && (
             <>
-              {/* <div onClick={logOut}>Logout</div> */}
               <button className='rounded-md px-8 py-2 flex items-center text-[14px] font-bold text-blue-950 border-[2px] border-blue-900' onClick={logOut}>Logout</button>
               <div className='font-bold'>{user?.data?.data?.username}</div>
             </>
@@ -100,54 +104,52 @@ const Navbar = () => {
               <button className='bg-blue-950 text-white font-bold rounded-lg px-8 py-2 flex items-center text-[14px]' onClick={() => setSignupModal(true)}>SignUp</button>
             </>
           )}
-
         </div>
 
+        {/* Modal for login */}
         <Modal open={openModal} onClose={() => setOpenModal(false)}>
           {openModal && <Login onSuccess={handleLoginSuccess} />}
         </Modal>
 
+        {/* Modal for signup */}
         <Modal open={signupModal} onClose={() => setSignupModal(false)}>
           {signupModal && <Signup onSignupSuccess={handleSignupSuccess} />}
         </Modal>
 
-        {/* MENU OPTION FOR MOBILE*/}
+        {/* Mobile navigation toggle button */}
         <div className='md:hidden'>
           <button className='cursor-pointer' onClick={toggleMenu}>
-            {
-              isMenuOpen ? <RxCross2 className='w-5 h-5' /> : <FaBars className='w-5 h-5' />
-            }
+            {isMenuOpen ? <RxCross2 className='w-5 h-5' /> : <FaBars className='w-5 h-5' />}
           </button>
         </div>
       </nav>
-      {/* DISPLAY MENU OPTION FOR MOBILE*/}
+
+      {/* Mobile navigation */}
       <div>
         <ul className={`md:hidden gap-12 text-lg block space-y-4 px-4 py-6 mt-24 bg-white ${isMenuOpen ? "fixed top-0 left-0 w-full transition-all ease-out duration-150" : "hidden"} `}>
           {navItems.map(({ path, link }) =>
-            <li className='text-start'>
+            <li key={path} className='text-start hover:bg-gray-200 block rounded-lg'>
               <NavLink onClick={toggleMenu} to={path}>{link}</NavLink>
             </li>
           )}
-          <div className='flex flex-row gap-5'>
-            {login && (
+          <div className='flex flex-row gap-5 items-center'>
+            {user && (
               <>
-                {/* <div onClick={logOut}>Logout</div> */}
                 <button className='rounded-md px-8 py-2 flex items-center text-[14px] font-bold text-blue-950 border-[2px] border-blue-900' onClick={logOut}>Logout</button>
-                <div className='font-bold'>{printUserName(user.username)}</div>
+                <div className='font-bold'>{user?.data?.data?.username}</div>
               </>
             )}
-            {!login && (
+            {!user && (
               <>
-                <button className='rounded-md px-8 py-2 flex items-center text-[14px] font-bold text-blue-950 border-[2px] border-blue-900' onClick={() => setOpenModal(true)}>Login</button>
-                <button className='bg-blue-950 text-white font-bold rounded-lg px-8 py-2 flex items-center text-[14px]' onClick={() => setSignupModal(true)}>SignUp</button>
+                <button className='rounded-md px-8 py-2 flex items-center text-[14px] font-bold text-blue-950 border-[2px] border-blue-900' onClick={() => { setOpenModal(true); toggleMenu() }}>Login</button>
+                <button className='bg-blue-950 text-white font-bold rounded-lg px-8 py-2 flex items-center text-[14px]' onClick={() => { setSignupModal(true); toggleMenu() }}>SignUp</button>
               </>
             )}
-
           </div>
         </ul>
-
       </div>
     </header>
+
 
   )
 }

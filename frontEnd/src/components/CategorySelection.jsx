@@ -22,16 +22,16 @@ const CategorySelection = ({ onSelectCategory }) => {
 
     return (
         <>
-            <button className='bg-blue-950 rounded-lg p-2' onClick={() => onSelectCategory('All')}>All</button>
-            {/* {console.log(selectedCategory)} */}
-            {selectedCategory && selectedCategory?.data?.map((item, index) => {
-                return (
-                    <>
-                        <button className={`bg-blue-950 rounded-lg p-2`}
-                            onClick={() => onSelectCategory(item._id)}>{item.categoryName}</button>
-                    </>
-                )
-            })}
+            <div className='flex flex-wrap justify-center gap-2 md:gap-4'>
+                <button className='bg-blue-950 rounded-lg p-2 md:p-3' onClick={() => onSelectCategory('All')}>All</button>
+                {/* {console.log(selectedCategory)} */}
+                {selectedCategory && selectedCategory?.data?.map((item, index) => {
+                    return (
+                        <button key={index} className={`bg-blue-950 rounded-lg p-2 md:p-3`} onClick={() => onSelectCategory(item._id)}>{item.categoryName}</button>
+                    )
+                })}
+            </div>
+
         </>
     )
 }
