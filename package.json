@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node_modules/.bin/nodemon backEnd/index.js",
+    "dev": "nodemon backEnd/index.js",
     "frontEnd": "npm run dev --prefix frontEnd",
-    "build": "npm install --prefix frontEnd && npm run build --prefix frontEnd && npm install"
+    "build": "npm install --prefix ./frontEnd && npm run build --prefix ./frontEnd && npm install"
   },
   "repository": {
     "type": "git",
