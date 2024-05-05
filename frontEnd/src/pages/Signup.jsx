@@ -59,6 +59,36 @@ const SignUp = ({ onSignupSuccess }) => {
 
     return (
         <>
+            {/* <h3 className='text-5xl font-semibold'>Sign Up</h3>
+            <p className='font-medium text-lg text-gray-500 mt-4'>Please Enter Your details</p>
+            <form className='mt-8' onSubmit={handleSubmit}>
+                <div className='flex flex-col items-start justify-center'>
+                    <label className='text-lg font-medium'>Username</label>
+                    <input type="text" placeholder='Enter Your Username' value={data.username} name='username' onChange={handleChange} className='w-full border-2 border-gray-100 rounded-xl p-2 mt-1 bg-transparent' onInvalid={error.errors?.response?.data?.username ? true : false} />
+                    <span className='text-red-500 text-start'>{error.errors?.response?.data?.username}</span>
+                </div>
+                <div className='flex flex-col items-start justify-center mt-2'>
+                    <label className='text-lg font-medium'>Email</label>
+                    <input type="email" placeholder='Enter Your email' value={data.email} name='email' onChange={handleChange} className='w-full border-2 border-gray-100 rounded-xl p-2 mt-1 bg-transparent' onInvalid={error.errors?.response?.data?.email ? true : false} />
+                    <span className='text-red-500 text-start'>{error.errors?.response?.data?.email}</span>
+                </div>
+                <div className='flex flex-col items-start justify-center mt-2'>
+                    <label className='text-lg font-medium'>Password</label>
+                    <input type="password" placeholder='Enter Your password' value={data.password} name='password' onChange={handleChange} className='w-full border-2 border-gray-100 rounded-xl p-2 mt-1 bg-transparent' onInvalid={error.errors?.response?.data?.password ? true : false} />
+                    <span className='text-red-500 text-start'>{error.errors?.response?.data?.password}</span>
+                </div>
+
+                <div className='mt-8 flex flex-col gap-y-4'>
+                    <button className='bg-blue-950 text-white text-lg font-bold py-3 rounded-xl active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out' type='submit'>Sign up</button>
+                </div>
+                <div className='mt-8 flex justify-center items-center'>
+                    <p className='font-medium text-base'>Already have an account?</p>
+                    <button
+                        className='ml-2 font-medium text-base text-blue-700'>Login</button>
+                </div>
+
+            </form> */}
+
             <h3 className='text-4xl md:text-5xl font-semibold'>Sign Up</h3>
             <p className='font-medium text-lg md:text-xl text-gray-500 mt-2 md:mt-4'>Please Enter Your details</p>
             <form className='mt-4 md:mt-8' onSubmit={handleSubmit}>
