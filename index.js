@@ -55,10 +55,11 @@ const connect = async () => {
 }
 
 // Define the list of allowed origins
-const allowedOrigins = ['http://127.0.0.1:5173', 'http://localhost:5000']; // Add any other origins as needed
+//http://127.0.0.1:5173
+const allowedOrigins ['https://mern-blog-app-pl56.vercel.app', 'http://localhost:5000']; // Add any other origins as needed
 
 // Configure CORS with options
-/*const corsOptions = {
+const corsOptions = {
   origin: function (origin, callback) {
     // Check if the origin is allowed or if it's a preflight request
     if (!origin || allowedOrigins.includes(origin) || origin === undefined) {
@@ -68,7 +69,7 @@ const allowedOrigins = ['http://127.0.0.1:5173', 'http://localhost:5000']; // Ad
     }
   },
   credentials: true, // Allow sending credentials (e.g., cookies, authorization headers)
-};*/
+};
 
 //// MIDDLEWARES
 
