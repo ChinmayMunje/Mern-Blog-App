@@ -58,7 +58,7 @@ const connect = async () => {
 const allowedOrigins = ['http://127.0.0.1:5173', 'http://localhost:5000']; // Add any other origins as needed
 
 // Configure CORS with options
-const corsOptions = {
+/*const corsOptions = {
   origin: function (origin, callback) {
     // Check if the origin is allowed or if it's a preflight request
     if (!origin || allowedOrigins.includes(origin) || origin === undefined) {
@@ -68,12 +68,12 @@ const corsOptions = {
     }
   },
   credentials: true, // Allow sending credentials (e.g., cookies, authorization headers)
-};
+};*/
 
 //// MIDDLEWARES
 
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
 // app.use(cors({
 //     origin: 'Access-Control-Allow-Origin',
 //     credentials: true,
