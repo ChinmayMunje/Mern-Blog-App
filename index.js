@@ -68,7 +68,7 @@ const corsOptions = {
 //// MIDDLEWARES
 
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
 // app.use(cors({
 //     origin: 'Access-Control-Allow-Origin',
 //     credentials: true,
