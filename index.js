@@ -61,14 +61,14 @@ const connect = async () => {
 
 
 const corsOptions = {
-  origin: 'http://127.0.0.1:5173', // Remove the trailing slash
+  origin: 'https://mern-blog-app-pl56.vercel.app', // Remove the trailing slash
   credentials: true,
   optionsSuccessStatus: 200
 };
 //// MIDDLEWARES
 
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 // app.use(cors({
 //     origin: 'Access-Control-Allow-Origin',
 //     credentials: true,
