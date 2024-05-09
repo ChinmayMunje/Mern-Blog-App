@@ -44,7 +44,7 @@ const connect = async () => {
 
 // Define the list of allowed origins
 //http://127.0.0.1:5173
-const allowedOrigins ['https://mern-blog-app-pl56.vercel.app', 'http://localhost:5000']; // Add any other origins as needed
+// const allowedOrigins ['https://mern-blog-app-pl56.vercel.app', 'http://localhost:5000']; // Add any other origins as needed
 
 // Configure CORS with options
 // const corsOptions = {
