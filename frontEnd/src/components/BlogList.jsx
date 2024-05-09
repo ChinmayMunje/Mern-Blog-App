@@ -58,7 +58,7 @@ const BlogList = ({searchQuery}) => {
         setPageNumber(0);
     }
 
-    const searchFilter = postContent?.content?.filter((blog) => blog.title.toLowerCase().includes(searchQuery.toLowerCase()));
+    // const searchFilter = postContent?.content?.filter((blog) => blog.title.toLowerCase().includes(searchQuery.toLowerCase()));
 
     console.log(postContent?.content);
 

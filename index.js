@@ -10,6 +10,8 @@ import categoryRoute from './routes/categoryRoute.js'
 import commentsRoute from './routes/commentsRoute.js'
 import { fileURLToPath } from 'url';
 import path, { dirname, join } from 'path';
+import helmet from "helmet";
+import xss from "xss-clean"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -20,24 +22,10 @@ const app = express();
 // app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/uploads', express.static(join(__dirname, 'uploads')));
 
-app.use(express.static(path.join(__dirname,"../frontEnd/dist")))
+app.use(express.static(path.join(__dirname,"public")))
 
-app.get("*", (req,res)=>{
-  res.sendFile(path.join(__dirname,"/frontEnd/dist/index.html"))
-})
-
-
-
-// app.get('*', (req, res)=>{
-//   res.sendFile(path.join(__dirname, "/frontEnd/dist/index.html"))
-// })
 
 const port = process.env.PORT || 8000
-
-// const corsOptions = {
-//     origin: true,
-//     credentials: true,
-// }
 
 /// DATABASE CONNECTION
 mongoose.set('strictQuery', false);
@@ -58,28 +46,31 @@ const connect = async () => {
 const allowedOrigins = ['http://127.0.0.1:5173', 'http://localhost:5000']; // Add any other origins as needed
 
 // Configure CORS with options
-const corsOptions = {
-  origin: function (origin, callback) {
-    // Check if the origin is allowed or if it's a preflight request
-    if (!origin || allowedOrigins.includes(origin) || origin === undefined) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true, // Allow sending credentials (e.g., cookies, authorization headers)
-};
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     // Check if the origin is allowed or if it's a preflight request
+//     if (!origin || allowedOrigins.includes(origin) || origin === undefined) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true, // Allow sending credentials (e.g., cookies, authorization headers)
+// };
 
+
+const corsOptions = {
+  origin: 'http://127.0.0.1:5173', // Remove the trailing slash
+  credentials: true,
+  optionsSuccessStatus: 200
+};
 //// MIDDLEWARES
 
 app.use(express.json());
-app.use(cors(corsOptions));
-// app.use(cors({
-//     origin: 'Access-Control-Allow-Origin',
-//     credentials: true,
-//     allowedHeaders: 'X-Requested-With, Content-Type, Authorization',
-//     methods: 'GET, POST, PATCH, PUT, POST, DELETE, OPTIONS'
-// }))
+app.use(cors());
+// app.use(helmet());
+// app.use(xss());
+
 app.use(cookieParser());
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/auth", authRoute);
