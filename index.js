@@ -22,13 +22,7 @@ const app = express();
 // app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/uploads', express.static(join(__dirname, 'uploads')));
 
-app.use(express.static(path.join(__dirname,"frontEnd/dist")))
-
-// app.get("*", (req,res)=>{
-//   res.sendFile(path.resolve(__dirname, "frontEnd", "dist", "index.html"));
-// })
-
-
+app.use(express.static(path.join(__dirname,"public")))
 
 
 const port = process.env.PORT || 8000
@@ -67,7 +61,7 @@ const connect = async () => {
 
 
 const corsOptions = {
-  origin: 'https://mern-blog-app-pl56.vercel.app', // Remove the trailing slash
+  origin: 'http://127.0.0.1:5173', // Remove the trailing slash
   credentials: true,
   optionsSuccessStatus: 200
 };
