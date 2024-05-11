@@ -40,7 +40,7 @@ const BlogItems = ({ blog }) => {
     return (
         <>
             <div className='flex flex-col h-auto md:h-[485px] rounded-lg shadow-lg shadow-gray-400'>
-                <img src={`https://mern-blog-app-wv1b.onrender.com/uploads/images/${thumbnail}`} alt='cover' className='w-full h-[250px] md:h-[200px] object-cover rounded-t-lg mb-2 md:mb-0' />
+                <img src={`/uploads/images/${thumbnail}`} alt='cover' className='w-full h-[250px] md:h-[200px] object-cover rounded-t-lg mb-2 md:mb-0' />
 
                 <Chip label={category} />
 
