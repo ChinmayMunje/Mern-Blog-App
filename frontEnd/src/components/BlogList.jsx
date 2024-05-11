@@ -9,7 +9,7 @@ import { UserContext } from '../context/userContext';
 import axios from 'axios';
 import Search from './Search';
 
-const BlogList = ({searchQuery}) => {
+const BlogList = ({ searchQuery }) => {
 
     const [postContent, setPostContent] = useState(
         {
@@ -58,14 +58,19 @@ const BlogList = ({searchQuery}) => {
         setPageNumber(0);
     }
 
-    // const searchFilter = postContent?.content?.filter((blog) => blog.title.toLowerCase().includes(searchQuery.toLowerCase()));
 
     console.log(postContent?.content);
 
     const filteredBlogs = selectedCategory === 'All' ? postContent.content : postContent?.content?.filter(blog => blog.category === selectedCategory);
 
+    const searchResult = searchQuery.trim();
+    
+    const matchTitlePost = searchResult ? postContent?.content?.filter(blog => blog.title.toLowerCase().includes(searchResult.toLowerCase())) : null;
 
-    const pageCount = Math.ceil(filteredBlogs?.length / postPerPage);
+    const finalFilteredBlogs = searchResult ? matchTitlePost : filteredBlogs
+
+
+    const pageCount = Math.ceil(finalFilteredBlogs?.length / postPerPage);
 
     const changePage = ({ selected }) => {
         setPageNumber(selected);
@@ -80,11 +85,11 @@ const BlogList = ({searchQuery}) => {
                     <CategorySelection onSelectCategory={handleCategoryChange} />
                 </div>
 
-                <h1 className='text-2xl md:text-3xl text-center'>Blogs Count ({filteredBlogs?.length})</h1>
+                <h1 className='text-2xl md:text-3xl text-center'>Blogs Count ({finalFilteredBlogs?.length})</h1>
 
                 <div className='pt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
-                    {filteredBlogs?.sort((a,b)=> new Date(b.postDate) - new Date(a.postDate))
-                    .slice(pagesVisited, pagesVisited + postPerPage)
+                    {finalFilteredBlogs?.sort((a, b) => new Date(b.postDate) - new Date(a.postDate))
+                        .slice(pagesVisited, pagesVisited + postPerPage)
                         .map(blog => <BlogItems blog={blog} key={blog.id} />)}
                 </div>
 

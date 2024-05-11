@@ -46,7 +46,7 @@ const BlogItems = ({ blog }) => {
 
                 <h3 className='mt-2 mb-1 text-start p-2 font-medium text-lg md:text-xl'>{title}</h3>
 
-                <p className='line-clamp-2 text-gray-600 text-start p-2 text-sm md:text-base' dangerouslySetInnerHTML={{ __html: content.substring(20) + "..." }}></p>
+                <p className='line-clamp-2 text-gray-600 text-start p-2 text-sm md:text-base' dangerouslySetInnerHTML={{ __html: content.substring(0,20) + "..." }}></p>
 
                 <div className='flex items-center mt-2 justify-between p-2'>
                     <div className='flex items-center'>
