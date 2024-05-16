@@ -106,7 +106,7 @@ const PostPage = () => {
                         </h3>
                     )}
                 </div>
-                <img src={`http://localhost:5000/uploads/images/${post.thumbnail}`} alt='post_Image' className='rounded-lg mt-5 mb-5 w-full' />
+                <img src={`/uploads/images/${post.thumbnail}`} alt='post_Image' className='rounded-lg mt-5 mb-5 w-full' />
                 <div dangerouslySetInnerHTML={{ __html: post.content }} />
 
                 <div className='mt-10'>
